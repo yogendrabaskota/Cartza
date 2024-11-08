@@ -1,9 +1,12 @@
 import express,{Application, Request, Response} from 'express'
+import * as dotenv from 'dotenv'
+import './database/connection'
 
 const app:Application = express()
 const PORT:number = 3000
 
-require ("./model/index")
+
+dotenv.config()
 
 app.get("/",(req:Request,res:Response)=>{
     res.send("hello world")
