@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 
 class AuthController {
-    async registerusser(req:Request,res:Response):Promise{
+    async registerusser(req:Request,res:Response):Promise<void>{
    
     }
 }
