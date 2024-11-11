@@ -5,6 +5,7 @@ import {
     DataType,
     CreatedAt,
     PrimaryKey
+    
 } from 'sequelize-typescript'
 
 @Table({
