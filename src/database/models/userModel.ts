@@ -9,8 +9,8 @@ import {
 } from 'sequelize-typescript'
 
 @Table({
-    tableName : 'users',
-    modelName : 'User',
+    tableName : 'users', // actual name of table
+    modelName : 'User', //code garda use garne name
     timestamps : true
 })
 
