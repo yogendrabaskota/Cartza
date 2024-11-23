@@ -1,5 +1,6 @@
 import {Request, Response} from 'express'
 import User from '../database/models/userModel'
+import bcrypt from 'bcrypt'
 
 class AuthController {
   public static async registeruser(req:Request,res:Response):Promise<void>{
@@ -15,7 +16,7 @@ class AuthController {
         await User.create({
             username,
             email,
-            password
+            password : bcrypt.hashSync(password,8)
         })
         res.status(200).json({
             message : "User registered successfully"
