@@ -2,6 +2,8 @@ import express,{Application, Request, Response} from 'express'
 import * as dotenv from 'dotenv'
 import './database/connection'
 
+dotenv.config()
+
 
 const app:Application = express()
 const PORT:number = 3000
