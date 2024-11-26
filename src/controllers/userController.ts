@@ -48,7 +48,7 @@ class AuthController {
        }
        const isMatched = bcrypt.compareSync(password,data.password) // true or false
        if(isMatched){
-        const token = jwt.sign({id:data.id},"process.env.SECRET_KEY",{
+        const token = jwt.sign({id:data.id},process.env.SECRET_KEY as string,{
             expiresIn : "20d"
         })
         
