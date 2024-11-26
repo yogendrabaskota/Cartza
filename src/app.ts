@@ -1,6 +1,7 @@
 import express,{Application, Request, Response} from 'express'
 import * as dotenv from 'dotenv'
 import './database/connection'
+import adminSeeder from './adminSseeder'
 
 dotenv.config()
 
@@ -10,8 +11,12 @@ const PORT:number = 3000
 dotenv.config()
 app.use(express.json())  
 
+//admin seeder
+adminSeeder()
+
 
 import userRoute from './routes/userRoute'
+
 
 
 app.use("/",userRoute)
