@@ -1,5 +1,7 @@
-import { Sequelize } from 'sequelize-typescript'
+import { ForeignKey, Sequelize } from 'sequelize-typescript'
 import dotenv from 'dotenv';
+import Product from './models/Product';
+import User from './models/userModel';
 dotenv.config()
 
 const sequelize = new Sequelize({
@@ -24,5 +26,10 @@ sequelize.authenticate()
 sequelize.sync({force : false}).then(()=>{
     console.log("Synced")
 })
+// Relationship
+User.hasMany(Product, {foreignKey : 'userId' })
+Product.belongsTo(User, {foreignKey : 'userId'} )
+
+
 
 export default sequelize

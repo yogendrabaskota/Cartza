@@ -1,13 +1,12 @@
 import { Request, Response } from "express"
 import Product from "../database/models/Product"
+import { AuthRequest } from "../middleware/authMiddleware"
 
-// interface MulterRequest extends Request {
-//     file?: Express.Multer.File; // Add multer's file type
-//   }
 
 
 class ProductController{
-    async addProduct(req:Request, res:Response):Promise<void>{
+    async addProduct(req:AuthRequest, res:Response):Promise<void>{
+    const userId = req.user?.id
      const {productName, productDescription, productTotalStockQty, productPrice}= req.body
      let fileName 
      if(req.file){
@@ -27,7 +26,8 @@ class ProductController{
         productDescription,
         productTotalStockQty,
         productPrice,
-        productImageUrl : fileName
+        productImageUrl : fileName,
+        userId
        })
        res.status(200).json({
         message : "Product added successfully"

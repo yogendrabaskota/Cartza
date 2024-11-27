@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import User from "../database/models/userModel";
 
 
-interface AuthRequest extends Request{
+export interface AuthRequest extends Request{
     user? :{
         username : String,
         email : String,

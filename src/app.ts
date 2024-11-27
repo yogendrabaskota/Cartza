@@ -1,7 +1,7 @@
 import express,{Application, Request, Response} from 'express'
 import * as dotenv from 'dotenv'
 import './database/connection'
-import adminSeeder from './adminSseeder'
+import adminSeeder from './adminSeeder'
 
 dotenv.config()
 
