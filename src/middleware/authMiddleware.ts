@@ -14,7 +14,7 @@ interface AuthRequest extends Request{
 }
 
 
-enum Role{
+export enum Role{
     Admin = 'admin',
     Customer = 'customer'
 }
@@ -25,7 +25,7 @@ class AuthMiddleware{
         const token = req.headers.authorization
         if(!token || token == undefined){
             res.status(403).json({
-                message : "Token not provided"
+                message : "Please Login"
             })
             return
         }

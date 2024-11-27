@@ -16,11 +16,11 @@ adminSeeder()
 
 
 import userRoute from './routes/userRoute'
-
+import productRoute from './routes/productRoute'
 
 
 app.use("/",userRoute)
-
+app.use("/admin/product",productRoute)
 
 
 
