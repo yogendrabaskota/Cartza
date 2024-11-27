@@ -2,6 +2,7 @@ import { ForeignKey, Sequelize } from 'sequelize-typescript'
 import dotenv from 'dotenv';
 import Product from './models/Product';
 import User from './models/userModel';
+import Category from './models/Category';
 dotenv.config()
 
 const sequelize = new Sequelize({
@@ -29,6 +30,9 @@ sequelize.sync({force : false}).then(()=>{
 // Relationship
 User.hasMany(Product, {foreignKey : 'userId' })
 Product.belongsTo(User, {foreignKey : 'userId'} )
+
+Category.hasOne(Product, {foreignKey : 'categoryId'})
+Product.belongsTo(Category, {foreignKey : 'categoryId'})
 
 
 
