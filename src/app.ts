@@ -2,6 +2,7 @@ import express,{Application, Request, Response} from 'express'
 import * as dotenv from 'dotenv'
 import './database/connection'
 import adminSeeder from './adminSeeder'
+import categoryController from './controllers/categoryController'
 
 dotenv.config()
 
@@ -18,11 +19,11 @@ adminSeeder()
 
 import userRoute from './routes/userRoute'
 import productRoute from './routes/productRoute'
-import categoryController from './controllers/categoryController'
-
+import categoryRoute from './routes/categoryRoute'
 
 app.use("/",userRoute)
 app.use("/admin/product",productRoute)
+app.use("/admin/category",categoryRoute)
 
 
 
