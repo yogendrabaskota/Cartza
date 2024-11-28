@@ -11,8 +11,10 @@ const router:Router = Express.Router()
 
 
 router.route("/")
-    .post(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin),upload.single('image'),productController.addProduct)
-    .get(productController.getAllProduct)
-
+    .post(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin),upload.single('image'),catchAsync(productController.addProduct))
+    .get(catchAsync(productController.getAllProduct))
+router.route("/:id")
+    .get(productController.getSingleProduct)
+    .delete(authMiddleware.isAuthenticated,authMiddleware.restrictTo(Role.Admin),catchAsync(productController.deleteProduct))
 
 export default router
