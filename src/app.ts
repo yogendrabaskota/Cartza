@@ -15,8 +15,10 @@ app.use(express.json())
 adminSeeder()
 
 
+
 import userRoute from './routes/userRoute'
 import productRoute from './routes/productRoute'
+import categoryController from './controllers/categoryController'
 
 
 app.use("/",userRoute)
@@ -32,5 +34,6 @@ app.get("/",(req:Request,res:Response)=>{
 })
 
 app.listen(PORT,()=>{
+    categoryController.seedCategory()
     console.log("server has started at port ", PORT)
 })

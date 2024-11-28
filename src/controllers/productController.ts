@@ -7,7 +7,7 @@ import { AuthRequest } from "../middleware/authMiddleware"
 class ProductController{
     async addProduct(req:AuthRequest, res:Response):Promise<void>{
     const userId = req.user?.id
-     const {productName, productDescription, productTotalStockQty, productPrice}= req.body
+     const {productName, productDescription, productTotalStockQty, productPrice, categoryId}= req.body
      let fileName 
      if(req.file){
         fileName = req.file?.filename
@@ -15,7 +15,7 @@ class ProductController{
         fileName = "https://th.bing.com/th/id/OIP.wMnFO4BYfxu7EAiQaLP8ogHaHa?rs=1&pid=ImgDetMain"
      }
 
-       if(!productName || !productDescription || !productTotalStockQty || !productPrice){
+       if(!productName || !productDescription || !productTotalStockQty || !productPrice || !categoryId){
         res.status(400).json({
             message : "Please provide productName, productDescription, productStock quantity, product price"
         })
@@ -27,7 +27,9 @@ class ProductController{
         productTotalStockQty,
         productPrice,
         productImageUrl : fileName,
-        userId
+        userId,
+        categoryId : categoryId
+
        })
        res.status(200).json({
         message : "Product added successfully"
