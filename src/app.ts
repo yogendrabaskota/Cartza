@@ -20,10 +20,13 @@ adminSeeder()
 import userRoute from './routes/userRoute'
 import productRoute from './routes/productRoute'
 import categoryRoute from './routes/categoryRoute'
+import cartRoute from './routes/cartRoute'
+
 
 app.use("/",userRoute)
 app.use("/admin/product",productRoute)
 app.use("/admin/category",categoryRoute)
+app.use("/user/cart",cartRoute)
 
 
 
