@@ -12,7 +12,7 @@ const router:Router = Express.Router()
 
 router.route("/")
     .post(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin),upload.single('image'),productController.addProduct)
-
+    .get(productController.getAllProduct)
 
 
 export default router

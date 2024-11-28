@@ -1,6 +1,8 @@
 import { Request, Response } from "express"
 import Product from "../database/models/Product"
 import { AuthRequest } from "../middleware/authMiddleware"
+import User from "../database/models/userModel"
+import Category from "../database/models/Category"
 
 
 
@@ -34,6 +36,37 @@ class ProductController{
        res.status(200).json({
         message : "Product added successfully"
        })
+    }
+
+    async getAllProduct(req:Request, res:Response):Promise<void>{
+
+      const data = await Product.findAll(
+         {
+            include : [
+               {
+                  model : User,
+                  attributes : ['id','username','email']
+               },
+               {
+                  model : Category,
+                  attributes : ['id','categoryName']
+               }
+            ]
+         }
+      )
+      if(data.length == 0){
+         res.status(404).json({
+            message:"No product found",
+            data
+         })
+         return
+      }
+      res.status(200).json({
+         message:"Product fetched successfullt",
+         data
+      })
+
+      
     }
 }
 
