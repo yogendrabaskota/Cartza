@@ -100,7 +100,30 @@ class CartController{
 
     }
 
-    
+    async updateCartItem(req:AuthRequest, res:Response):Promise<void>{
+        const {productId} = req.params
+        const userId = req.user?.id 
+        const {quantity} = req.body
+        if(!quantity){
+            res.status(400).json({
+                message : "Please Provide wuantity"
+            })
+            return
+        }
+        const cartData:any = await Cart.findOne({
+            where : {
+                userId,
+                productId
+            }
+        })
+        cartData.quantity = quantity
+        await cartData?.save()
+        res.status(200).json({
+            message : "Cart updated Successfully",
+            data : cartData
+        })
+        
+    }
 
 }
 
