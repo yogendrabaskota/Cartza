@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AuthRequest } from "../middleware/authMiddleware";
 import Cart from "../database/models/Cart";
 import Product from "../database/models/Product";
+import Category from "../database/models/Category";
 
 class CartController{
     async addToCart(req:AuthRequest, res:Response):Promise<void>{
@@ -49,7 +50,13 @@ class CartController{
             include : [
                 {
                     model :Product,
-                    attributes : ['id','productName']
+                   // attributes : ['id','productName']
+                   include : [
+                    {
+                        model : Category,
+                        attributes : ['id','categoryName']
+                    }
+                   ]
 
                 
             }
@@ -68,6 +75,32 @@ class CartController{
 
         }
     }
+
+    async deleteMyCartItem(req:AuthRequest, res:Response):Promise<void>{
+        const userId = req.user?.id
+        const {productId} = req.params
+
+        const product = await Product.findByPk(productId)
+        if(!product){
+            res.status(404).json({
+                message : "Invalid/Empty Product Id"
+            })
+            return
+        }
+        // ddelete from cart
+        await Cart.destroy({
+            where : {
+                userId,
+                productId
+            }
+        })
+        res.status(200).json({
+            message : "Item removed Successfully"
+        })
+
+    }
+
+    
 
 }
 

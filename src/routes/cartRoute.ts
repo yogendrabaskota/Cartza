@@ -11,4 +11,8 @@ router.route("/")
     .post(authMiddleware.isAuthenticated,catchAsync(cartController.addToCart))
     .get(authMiddleware.isAuthenticated, catchAsync(cartController.getMyCart))
 
+router.route(":/productId")
+    .delete(authMiddleware.isAuthenticated, catchAsync(cartController.deleteMyCartItem))
+   // .patch(authMiddleware.isAuthenticated, catchAsync(cartController.updateCartItem))
+
 export default router
