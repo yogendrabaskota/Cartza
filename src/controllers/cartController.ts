@@ -106,7 +106,7 @@ class CartController{
         const {quantity} = req.body
         if(!quantity){
             res.status(400).json({
-                message : "Please Provide wuantity"
+                message : "Please Provide quantity"
             })
             return
         }
