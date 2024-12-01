@@ -4,6 +4,17 @@ import Cart from "../database/models/Cart";
 import Product from "../database/models/Product";
 import Category from "../database/models/Category";
 
+
+// interface CartData {
+//     id : string | null,
+//     quantity : number | null,
+//     createdAt : string | null,
+//     updatedAt : string | null,    
+//     userId : string | null,
+//     productId : string | null
+
+// }
+
 class CartController{
     async addToCart(req:AuthRequest, res:Response):Promise<void>{
         const userId = req.user?.id
@@ -110,18 +121,25 @@ class CartController{
             })
             return
         }
-        const cartData:any = await Cart.findOne({
+        const cartData :Cart | null = await Cart.findOne({
             where : {
                 userId,
                 productId
             }
         })
-        cartData.quantity = quantity
-        await cartData?.save()
-        res.status(200).json({
-            message : "Cart updated Successfully",
-            data : cartData
-        })
+        if(cartData){
+            cartData.quantity = quantity
+        
+            await cartData?.save()
+            res.status(200).json({
+                message : "Cart updated Successfully",
+                data : cartData
+            })
+        }else{
+            res.status(404).json({
+                message : "opps!! Something went wrong"
+            })
+        }
         
     }
 
