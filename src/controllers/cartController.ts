@@ -61,7 +61,7 @@ class CartController{
             include : [
                 {
                     model :Product,
-                   // attributes : ['id','productName']
+                    attributes : ['productName','productDescription','productImageUrl'],
                    include : [
                     {
                         model : Category,
@@ -71,7 +71,8 @@ class CartController{
 
                 
             }
-        ]
+        ],
+        attributes : ['productId','quantity']
         })
         
         if(datas.length == 0){
