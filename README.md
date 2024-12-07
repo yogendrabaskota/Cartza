@@ -1,15 +1,15 @@
 
-# Library-Management-System:
+# E-commerce
 
-This is a fully functional E-commerce website built using the MERN stack (MongoDB, Express.js, React.js, Node.js) with SQL as the database. The platform enables users to browse products, add them to a cart, make secure payments, and manage orders.
+This is a fully functional E-commerce website built using the MERN stack with SQL as the database. The platform enables users to browse products, add them to a cart, make secure payments, and manage orders.
 
 ## Features:
 
-- User Authentication: Register and log in using secure authentication.
-- Product Browsing: View product listings with details such as price, description, and category.
-- Cart Functionality: Add products to the cart, update quantities, or remove items.
-- Order Management: Place orders and view order history.
-#### Admin Panel:
+- **User Authentication**: Register and log in using secure authentication.
+- **Product Browsing**: View product listings with details such as price, description, and category.
+- **Cart Functionality**: Add products to the cart, update quantities, or remove items.
+- **Order Management**: Place orders and view order history.
+#### **Admin Panel**:
 - Add, edit, or remove products.
 - Manage orders.
 - View sales data.
@@ -17,14 +17,14 @@ This is a fully functional E-commerce website built using the MERN stack (MongoD
 
 ## Tech Stack:
 ### Frontend:
-- React.js
-- Redux (State Management)
-- TailwindCSS
+- **React.js**
+- **Redux** (State Management)
+- **TailwindCSS**
 ### Backend:
-- Node.js
-- Express.js
+- **Node.js**
+- **Express.js**
 ### Database:
-- SQL(MySQL)
+- **SQL**(MySQL)
 
 
 ## Additional Features
@@ -36,18 +36,18 @@ This is a fully functional E-commerce website built using the MERN stack (MongoD
 ## 🚀 Installation  
 
 ### Prerequisites:  
-- Node.js installed  
-- SQL database setup (e.g., MySQL, PostgreSQL)  
+- **Node.js** installed  
+- **SQL database setup** (MySQL)  
 
-### Steps to Run:  
+## **Steps to Run**:  
+## To Run Backend Server
 
 #### 1. Clone the repository  
 ```bash  
-git clone https://github.com/your-username/ecommerce-website.git  
-cd ecommerce-website  
+git clone https://github.com/yogendrabaskota/nodeEcommerce.git  
 ```
-- Create .env file with the help of .env.example
-```bashs
+- Create .env file 
+```bash
 DB_NAME = NAME_OF_DATABASE
 DB_USERNAME = USERNAME_OF_DATABASE
 DB_PASSWORD = PASSWORD_OF_DATABASE
@@ -57,20 +57,35 @@ SECRET_KEY = SECRET_KEY_OF_JWT
 
 ``` 
 
-# yaha dekhi tala milauna baaki xa
 
-
-- Open command prompt and run following command 
-
-
-
+- To install required packages
+ 
 
 ```https 
   npm install
 ``` 
- ### TO run the project :
+- TO run server
 ```https 
   npm start
+``` 
+
+## To Run Frontend
+- clone Frontend repository by using following command
+
+```https 
+git clone https://github.com/yogendrabaskota/nodeEcommerce.git 
+  
+``` 
+- To install required packages 
+
+```https 
+  npm install
+``` 
+
+- To run project
+
+```https 
+  npm run dev
 ``` 
 
 ### To get API documentation, click [Here](https://documenter.getpostman.com/view/33322053/2sAYBbeUTa)
@@ -78,7 +93,6 @@ SECRET_KEY = SECRET_KEY_OF_JWT
 
 [comment]: # (## Output :
   <img src="./output.jpg" />)
-
 
 
 ## Feedback
