@@ -10,12 +10,12 @@ import {
 } from 'sequelize-typescript'
 
 @Table({
-    tableName : 'orders', 
-    modelName : 'Order', 
+    tableName : 'payments', 
+    modelName : 'Payment', 
     timestamps : true
 })
 
-class Order extends Model{
+class Payment extends Model{
     @Column({
         primaryKey : true,
         type : DataType.UUID,
@@ -51,4 +51,4 @@ class Order extends Model{
     
 }
 
-export default Order
+export default Payment

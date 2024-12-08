@@ -4,6 +4,9 @@ import Product from './models/Product';
 import User from './models/userModel';
 import Category from './models/Category';
 import Cart from './models/Cart';
+import Order from './models/Order';
+import OrderDetail from './models/OrderDetails';
+import Payment from './models/Payment';
 dotenv.config()
 
 const sequelize = new Sequelize({
@@ -25,7 +28,7 @@ sequelize.authenticate()
     console.log(err)
 })
 
-sequelize.sync({force : false}).then(()=>{
+sequelize.sync({force : true}).then(()=>{
     console.log("Synced")
 })
 // Relationship
@@ -40,5 +43,18 @@ Cart.belongsTo(Product, {foreignKey : 'productId'})
 
 User.hasMany(Cart, {foreignKey : 'userId'})
 Cart.belongsTo(User, {foreignKey : 'userId'})
+
+
+//Order and OrderDetails relation
+Order.hasMany(OrderDetail,{foreignKey : 'orderId'})
+OrderDetail.belongsTo(Order,{foreignKey : 'orderId'})
+
+Product.hasMany(OrderDetail,{foreignKey : 'productId'})
+OrderDetail.belongsTo(Product,{foreignKey : 'productId'})
+
+Payment.hasOne(Order,{foreignKey : 'paymentId'})
+Order.belongsTo(Payment,{foreignKey : 'paymentId'})
+
+
 
 export default sequelize
