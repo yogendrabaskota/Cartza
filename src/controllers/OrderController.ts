@@ -36,7 +36,7 @@ class OrderController{
             })
         }
         if(paymentDetails.paymentMethod === PaymentMethod.Khalti){
-            // Khalti Integration 
+            // Khalti Integration Here
 
         }else{
             res.status(200).json({
