@@ -28,7 +28,7 @@ sequelize.authenticate()
     console.log(err)
 })
 
-sequelize.sync({force : true}).then(()=>{
+sequelize.sync({force : false}).then(()=>{
     console.log("Synced")
 })
 // Relationship
