@@ -57,7 +57,7 @@ class OrderController{
             paymentData.pidx = khaltiResponse.pidx
             paymentData.save()
             res.status(200).json({
-                message : "order placed successfully",
+                message : "Order placed successfully",
                 url : khaltiResponse.payment_url
             })
 
