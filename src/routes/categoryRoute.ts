@@ -14,7 +14,8 @@ router.route("/")
 
 router.route("/:id")
     .delete(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin), catchAsync(categoryController.deleteCategory))
-    .patch(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin), catchAsync(categoryController.updateCategory))
+    
+    .patch(authMiddleware.isAuthenticated, authMiddleware.restrictTo(Role.Admin), catchAsync(categoryController.updateCategory)) 
 
 
 export default router
