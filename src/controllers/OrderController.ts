@@ -72,6 +72,22 @@ class OrderController{
 
     }
 
+    async verifyTransaction(req:AuthRequest,res:Response):Promise<void>{
+        const {pidx} = req.body
+        const userId = req.user?.id
+        if(!pidx){
+            res.status(400).json({
+                message : "Please provide pidx"
+            })
+            return
+        }
+        const response = await axios.post("https://a.khalti.com/api/v2/epayment/lookup/",{pidx},{
+            headers : {
+                'Authorization' : 'key 1bede2f3815e47eb98a472675e017104'
+            }
+        })
+    }
+
 }
 
 export default new OrderController()
