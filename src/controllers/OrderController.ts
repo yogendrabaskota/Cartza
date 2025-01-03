@@ -1,6 +1,6 @@
 import { AuthRequest } from "../middleware/authMiddleware";
 import { Response } from "express";
-import { KhaltiResponse, OrderData, PaymentMethod } from "../types/orderTypes";
+import { KhaltiResponse, OrderData, PaymentMethod, TransactionStatus, TransactionVerificationResponse } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
@@ -74,7 +74,7 @@ class OrderController{
 
     async verifyTransaction(req:AuthRequest,res:Response):Promise<void>{
         const {pidx} = req.body
-        const userId = req.user?.id
+        //const userId = req.user?.id
         if(!pidx){
             res.status(400).json({
                 message : "Please provide pidx"
@@ -86,6 +86,23 @@ class OrderController{
                 'Authorization' : 'key 1bede2f3815e47eb98a472675e017104'
             }
         })
+        const data:TransactionVerificationResponse = response.data
+        //console.log("data ",data)
+        if(data.status === TransactionStatus.Completed){
+            await Payment.update({paymentStatus:'paid'},{
+                where : {
+                    pidx : pidx
+                }
+            })
+            res.status(200).json({
+                message : "Payment verified successfully"
+            })
+            //console.log("order here ",order)
+        }else{
+            res.status(200).json({
+                message : "Payment not verified"
+            })
+        }
     }
 
 }

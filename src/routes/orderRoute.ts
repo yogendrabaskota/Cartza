@@ -9,6 +9,8 @@ const router:Router = Express.Router()
 
 
 router.route("/").post(authMiddleware.isAuthenticated,catchAsync(OrderController.createOrder))
+router.route('/verify')
+    .post(authMiddleware.isAuthenticated,catchAsync(OrderController.verifyTransaction))
 
 
 

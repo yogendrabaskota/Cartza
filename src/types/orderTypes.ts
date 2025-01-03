@@ -44,9 +44,9 @@ export interface TransactionVerificationResponse {
     refunded : boolean
 }
 
-enum TransactionStatus {
-    Completed = 'completed',
-    Refunded = 'refunded',
-    Pending = 'pending',
-    Initiated = 'initiated'
+export enum TransactionStatus {
+    Completed = 'Completed',
+    Refunded = 'Refunded',
+    Pending = 'Pending',
+    Initiated = 'Initiated'
 }
