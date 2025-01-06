@@ -5,6 +5,7 @@ import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
+import Product from "../database/models/Product";
 
 class OrderController{
     async createOrder(req:AuthRequest, res:Response):Promise <void>{
@@ -103,6 +104,65 @@ class OrderController{
                 message : "Payment not verified"
             })
         }
+    }
+
+    async fetchMyOrders(req:AuthRequest, res:Response):Promise<void>{
+        const userId = req.user?.id
+        const orders = await Order.findAll({
+            where : {
+                userId 
+            },
+            include : [
+                {
+                    model : Payment
+                }
+            ]
+        })
+        if(orders.length > 0) {
+            res.status(200).json({
+            message : "Orders fetched successfully",
+            data : orders
+            })
+
+        }else {
+            res.status(404).json({
+                message : "No orders found",
+                data : []
+            })
+        }
+
+    }
+
+    async fetchOrderDetails(req:AuthRequest,res:Response):Promise<void>{
+      
+        const orderId = req.params.id 
+        const orderDetails = await OrderDetail.findAll({
+            where : {
+                orderId
+
+            },
+            include : [
+                {
+                    model : Product
+                }
+            ]
+        })
+        if(orderDetails.length > 0){
+            res.status(200).json({
+                message : "OrderDetails fetched ",
+                data : orderDetails
+            })
+        }else{
+            res.status(404).json({
+                message : "No any orderDetails with that id",
+                data : []
+            })
+        }
+    }
+
+    async cancelMyOrder(req:AuthRequest,res:Response):Promise<void>{
+        const userId = req.user?.id
+        const orderId = req.params.id
     }
 
 }
