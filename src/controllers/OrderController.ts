@@ -1,6 +1,6 @@
 import { AuthRequest } from "../middleware/authMiddleware";
 import { Response } from "express";
-import { KhaltiResponse, OrderData, PaymentMethod, TransactionStatus, TransactionVerificationResponse } from "../types/orderTypes";
+import { KhaltiResponse, OrderData, OrderStatus, PaymentMethod, TransactionStatus, TransactionVerificationResponse } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
@@ -106,6 +106,8 @@ class OrderController{
         }
     }
 
+
+    //User side
     async fetchMyOrders(req:AuthRequest, res:Response):Promise<void>{
         const userId = req.user?.id
         const orders = await Order.findAll({
@@ -163,6 +165,28 @@ class OrderController{
     async cancelMyOrder(req:AuthRequest,res:Response):Promise<void>{
         const userId = req.user?.id
         const orderId = req.params.id
+        const order:any = await Order.findAll({
+            where : {
+                userId,
+                id : orderId
+            }
+        })
+        if(order?.orderStatus === OrderStatus.Ontheway || order?.OrderStatus.Preparation){
+            res.status(200).json({
+                message : "You cannot cancel the order when it is on the way or prepared"
+            })
+            return
+
+        }
+        await Order.update({OrderStatus : OrderStatus.Cancelled},{
+            where : {
+                id : orderId
+            }
+        })
+            res.status(200).json({
+                message : "Order cancelled successfully"
+            })
+        
     }
 
 }
