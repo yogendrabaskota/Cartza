@@ -1,11 +1,17 @@
 import { AuthRequest } from "../middleware/authMiddleware";
-import { Response } from "express";
-import { KhaltiResponse, OrderData, OrderStatus, PaymentMethod, TransactionStatus, TransactionVerificationResponse } from "../types/orderTypes";
+import { Response , Request} from "express";
+import { KhaltiResponse, OrderData, OrderStatus, PaymentMethod, PaymentStatus, TransactionStatus, TransactionVerificationResponse } from "../types/orderTypes";
 import Order from "../database/models/Order";
 import Payment from "../database/models/Payment";
 import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
 import Product from "../database/models/Product";
+
+
+class ExtendedOrder extends Order {
+    declare paymentId : string | null
+}
+
 
 class OrderController{
     async createOrder(req:AuthRequest, res:Response):Promise <void>{
@@ -187,6 +193,44 @@ class OrderController{
                 message : "Order cancelled successfully"
             })
         
+    }
+
+
+    // Admin side
+    async changeOrderStatus(req:Request,res:Response):Promise<void>{
+    
+       const orderId = req.params.id 
+       const orderStatus:OrderStatus = req.body.orderStatus
+      //  const {orderStatus}:OrderStatus = req.body
+        
+
+        await Order.update({
+            orderStatus : OrderStatus
+        },{
+            where : {
+                id : orderId
+            }
+            
+        })
+        res.status(200).json({
+            message : "Order status updated successfully"
+        })
+    }
+
+    async changePaymentStatus(req:Request, res:Response):Promise<void> {
+        const orderId = req.params.id;
+        const order = await Order.findByPk(orderId)
+        const paymentStatus: PaymentStatus = req.body.paymentStatus
+        const extendedOrder : ExtendedOrder = order as ExtendedOrder
+        await Payment.update({
+            paymentStatus: paymentStatus
+        },{
+            where : {
+                id : extendedOrder.paymentId
+            }
+        })
+
+
     }
 
 }
