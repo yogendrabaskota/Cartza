@@ -229,9 +229,44 @@ class OrderController{
                 id : extendedOrder.paymentId
             }
         })
+        res.status(200).json({
+            message : `payment status of orderId${orderId} updated successfully to ${paymentStatus}`
+        })
+    }
+    async deleteOrder(req:Request,res:Response):Promise<void>{
+        const orderId = req.params.id
+        const order = await Order.findByPk(orderId)
+        const extendedOrder : ExtendedOrder = order as ExtendedOrder
 
+
+        if(order){
+        await Order.destroy({
+            where : {
+                id : orderId
+            }
+        })
+        await OrderDetail.destroy({
+            where : {
+                orderId : orderId
+            }
+        })
+        await Payment.destroy({
+            where : {
+                id : extendedOrder.paymentId
+            }
+        })
+        res.status(200).json({
+            message : "Order deleted successfully"
+        })
+
+        }else{
+            res.status(400).json({
+                message : "No order found with that orderId"
+            })
+        }
 
     }
+
 
 }
 

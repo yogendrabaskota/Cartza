@@ -19,5 +19,8 @@ router.route('/customer')
 router.route('/customer/:id')
     .patch(authMiddleware.isAuthenticated,authMiddleware.restrictTo(Role.Customer),catchAsync(OrderController.cancelMyOrder))
     .get(authMiddleware.isAuthenticated,catchAsync(OrderController.fetchOrderDetails))
+router.route("/admin/:id")
+    .patch(authMiddleware.isAuthenticated,authMiddleware.restrictTo(Role.Admin),catchAsync(OrderController.changeOrderStatus))
+    .delete(authMiddleware.isAuthenticated,authMiddleware.restrictTo(Role.Admin),catchAsync(OrderController.deleteOrder))
 
 export default router
