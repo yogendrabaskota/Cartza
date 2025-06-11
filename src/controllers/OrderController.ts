@@ -240,11 +240,7 @@ class OrderController{
 
 
         if(order){
-        await Order.destroy({
-            where : {
-                id : orderId
-            }
-        })
+     
         await OrderDetail.destroy({
             where : {
                 orderId : orderId
@@ -253,6 +249,12 @@ class OrderController{
         await Payment.destroy({
             where : {
                 id : extendedOrder.paymentId
+            }
+        })
+
+        await Order.destroy({
+            where : {
+                id : orderId
             }
         })
         res.status(200).json({
