@@ -7,6 +7,7 @@ import Home from './pages/home/Home'
 import Register from './pages/auth/register/Register'
 import Login from './pages/auth/login/Login'
 
+
 function App() {
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element ={<Home />} /> 
         <Route path='/register' element ={<Register />}  />
         <Route path='/login' element={<Login />} />
+
 
 
 

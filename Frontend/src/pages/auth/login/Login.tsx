@@ -1,8 +1,8 @@
-
+import Form from "../Form"
 
 const Login = () => {
   return (
-    <div>Login</div>
+   <Form />
   )
 }
 

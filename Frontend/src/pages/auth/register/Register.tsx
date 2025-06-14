@@ -1,8 +1,10 @@
+import Form from "../Form"
 
 
 const Register = () => {
   return (
-    <div>Register</div>
+   
+    <Form />
   )
 }
 
