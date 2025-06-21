@@ -1,17 +1,31 @@
 
 import Form from "../Form"
-import type { UserDataTypes } from "../types"
-import { register } from "../../../store/authSlice"
-import { useAppDispatch } from "../../../store/hooks"
+import type { RegisterUserTypes } from "../types"
+import { register, resetStatus } from "../../../store/authSlice"
+import { useAppDispatch, useAppSelector } from "../../../store/hooks"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import { Status } from "../../../globals/types/types"
 
 
 const Register = () => {
+  const navigate = useNavigate()
+    const {status} = useAppSelector((state)=>state.auth)
   const dispatch = useAppDispatch()
-  const handleRegister = (data:UserDataTypes) =>{
-    console.log(data)
+
+  const handleRegister = async(data:RegisterUserTypes) =>{
+  //  console.log(data)
     dispatch(register(data))
+    
 
   }
+
+  useEffect(()=>{
+    if(status === Status.SUCCESS){
+      dispatch(resetStatus())
+      navigate('/login')
+    }
+  },[status, dispatch, navigate])
 
 
   return (
