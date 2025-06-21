@@ -1,6 +1,6 @@
 
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 import type { UserDataTypes, Props } from "./types";
 
 
@@ -13,7 +13,7 @@ const Form: React.FC<Props> = ({ type, onSubmit }) => {
     password : ""
   })
 
-  const handleChange = (e:FormEvent<HTMLInputElement>)  =>{
+  const handleChange = (e:ChangeEvent<HTMLInputElement>)  =>{
     const {name,value} = e.target
     setUserData({
       ...userData,
@@ -95,7 +95,7 @@ const Form: React.FC<Props> = ({ type, onSubmit }) => {
                 onChange={handleChange}
               />
             </div>
-            {type === "register" && (
+            {/* {type === "register" && (
               <div>
                 <label
                   htmlFor="confirm_password"
@@ -112,7 +112,7 @@ const Form: React.FC<Props> = ({ type, onSubmit }) => {
                   onChange={handleChange}
                 />
               </div>
-            )}
+            )} */}
 
             <div className="mb-5 flex items-center justify-between gap-2">
               <label className="flex items-center">

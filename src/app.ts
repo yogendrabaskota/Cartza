@@ -3,6 +3,10 @@ import * as dotenv from 'dotenv'
 import './database/connection'
 import adminSeeder from './adminSeeder'
 import categoryController from './controllers/categoryController'
+import cors from 'cors'
+
+
+
 
 dotenv.config()
 
@@ -24,6 +28,7 @@ import cartRoute from './routes/cartRoute'
 import orderRoute from './routes/orderRoute'
 
 
+
 app.use("/",userRoute)
 app.use("/admin/product",productRoute)
 app.use("/admin/category",categoryRoute)
@@ -31,7 +36,9 @@ app.use("/user/cart",cartRoute)
 app.use("/order",orderRoute)
 
 
-
+app.use(cors({
+    origin: "http://localhost:5173",
+}))
 
 
 
