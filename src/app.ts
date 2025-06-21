@@ -21,6 +21,9 @@ adminSeeder()
 
 
 
+app.use(cors({
+    origin: "*",
+}))
 import userRoute from './routes/userRoute'
 import productRoute from './routes/productRoute'
 import categoryRoute from './routes/categoryRoute'
@@ -36,9 +39,7 @@ app.use("/user/cart",cartRoute)
 app.use("/order",orderRoute)
 
 
-app.use(cors({
-    origin: "http://localhost:5173",
-}))
+
 
 
 

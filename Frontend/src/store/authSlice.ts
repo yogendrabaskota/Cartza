@@ -3,6 +3,7 @@
 
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit'
 import API from '../http'
+import { Status } from '../globals/types/types'
 
 interface RegisterData{
     username : string,
@@ -28,13 +29,13 @@ interface User {
 // }
 interface AuthState {
     user : User,
-    status : string
+    status : Status
 }
 
 
 const initialState: AuthState = {
     user : {} as User,
-    status : ''
+    status : Status.LOADING 
 }
 
 
@@ -45,8 +46,8 @@ const authSlice = createSlice({
         setUser(state:AuthState, action:PayloadAction<User>){
             state.user = action.payload
         },
-        setStatus(state:AuthState, action: PayloadAction<string>){
-            state.status = action.payload
+        setStatus(state:AuthState, action: PayloadAction<Status>){
+            state.status = action.payload 
     }
 }
 })
@@ -57,19 +58,19 @@ export default authSlice.reducer
 
 export function register(data:RegisterData){
     return async function registerThunk(dispatch:any){
-        dispatch(setStatus('loading'))
+        dispatch(setStatus(Status.LOADING))
        try {
          const response = await API.post('/register',data)
         if(response.status === 201){
-            dispatch(setStatus('success'))
+            dispatch(setStatus(Status.SUCCESS))
         }else{
-            dispatch(setStatus('error'))
+            dispatch(setStatus(Status.ERROR))
 
             
         }
         
        } catch (error) {
-        dispatch(setStatus('error'))
+        dispatch(setStatus(Status.ERROR))
         
        }
     }
@@ -77,18 +78,18 @@ export function register(data:RegisterData){
 
 export function login(data:LoginData){
     return async function loginThunk(dispatch:any){
-        dispatch(setStatus('loading'))
+        dispatch(setStatus(Status.LOADING))
         try {
             const response = await API.post('/login',data)
             if(response.status === 200){
-                dispatch(setStatus('success'))
+                dispatch(setStatus(Status.SUCCESS))
 
             }else{
-                dispatch(setStatus('error'))
+                dispatch(setStatus(Status.ERROR))
 
             }
         } catch (error) {
-            dispatch(setStatus('error'))
+            dispatch(setStatus(Status.ERROR))
             
         }
 
