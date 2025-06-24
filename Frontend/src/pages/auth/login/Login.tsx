@@ -12,7 +12,7 @@ const Login = () => {
   const dispatch = useAppDispatch()
 
   const handleLogin = async(data:LoginUserTypes) =>{
-    console.log(data)
+    //console.log(data)
     dispatch(login(data))
     
 

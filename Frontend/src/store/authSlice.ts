@@ -76,22 +76,22 @@ export function register(data: RegisterData) {
 
 export function login(data: LoginData) {
   return async function loginThunk(dispatch: any) {
-    dispatch(setStatus(Status.LOADING));
+    dispatch(setStatus(Status.LOADING))
     try {
-      const response = await API.post("/login", data);
+      const response = await API.post("/login", data)
       //console.log(response.data)
-      console.log(`${response.data.data}`);
+      //console.log(`${response.data.data}`);
 
       if (response.status === 200) {
         const { data } = response.data;
-        dispatch(setStatus(Status.SUCCESS));
-        dispatch(setUser(data));
-        localStorage.setItem("token", data); // Store token in localStorage
+        dispatch(setStatus(Status.SUCCESS))
+        dispatch(setUser(data))
+        localStorage.setItem("token", data) // Store token in localStorage
       } else {
-        dispatch(setStatus(Status.ERROR));
+        dispatch(setStatus(Status.ERROR))
       }
     } catch (error) {
-      dispatch(setStatus(Status.ERROR));
+      dispatch(setStatus(Status.ERROR))
     }
-  };
+  }
 }
