@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import API from "../http";
+import {API} from "../http";
 import { Status } from "../globals/types/types";
 
 interface RegisterData {

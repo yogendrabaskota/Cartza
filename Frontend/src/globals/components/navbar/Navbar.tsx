@@ -15,14 +15,16 @@ const Navbar = () => {
     localStorage.removeItem('token')
     setIsLoggedIn(false)
     dispatch(setToken(''))
-
-
-
   }
+      const cartItem = useAppSelector((state)=>state.cart)
+      const cartItemNum = [cartItem.items].length
+    //console.log(cartItem.items)
+    //console.log(cartItemNum)
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
     setIsLoggedIn(!!token || !!user.token)
+
   },[user.token])
 
   return (
@@ -87,7 +89,7 @@ const Navbar = () => {
                 className="text-sm font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
               >
                 <span>
-                  Cart<sub>{}</sub>{" "}
+                  Cart<sup className="text-red-700">{cartItemNum}</sup>{" "}
                 </span>
               </Link>
             </>

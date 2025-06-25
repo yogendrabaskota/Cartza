@@ -18,7 +18,7 @@ import Category from "../database/models/Category";
 class CartController{
     async addToCart(req:AuthRequest, res:Response):Promise<void>{
         const userId = req.user?.id
-        console.log("user id",userId)
+        //console.log("user id",userId)
         const {quantity, productId} = req.body
 
         if(!quantity || !productId){
@@ -46,9 +46,14 @@ class CartController{
             })
             
         }
+        const product = await Product.findByPk(productId)
         res.status(200).json({
             message : "Item added to cart successfully",
-            data : cartItem
+            data : 
+            {
+                ...cartItem.toJSON(),
+                product : product?.toJSON()
+            }
         })
     }
 
