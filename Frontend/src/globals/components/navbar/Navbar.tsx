@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import { useEffect, useState } from "react"
 import { setToken } from "../../../store/authSlice"
+import { fetchCartItems } from "../../../store/cartSlice"
 
 
 const Navbar = () => {
@@ -12,19 +13,20 @@ const Navbar = () => {
 
 
   const handleLogout=()=>{
+
     localStorage.removeItem('token')
     setIsLoggedIn(false)
     dispatch(setToken(''))
   }
-      const cartItem = useAppSelector((state)=>state.cart)
-      const cartItemNum = [cartItem.items].length
-    //console.log(cartItem.items)
+      const {items} = useAppSelector((state)=>state.cart)
+      //const cartItemNum = [cartItem.items].length
+    console.log(items)
     //console.log(cartItemNum)
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
     setIsLoggedIn(!!token || !!user.token)
-
+    dispatch(fetchCartItems())
   },[user.token])
 
   return (
@@ -89,7 +91,7 @@ const Navbar = () => {
                 className="text-sm font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
               >
                 <span>
-                  Cart<sup className="text-red-700">{cartItemNum}</sup>{" "}
+                  Cart<sup className="text-green-700">{items.length}</sup>{" "}
                 </span>
               </Link>
             </>

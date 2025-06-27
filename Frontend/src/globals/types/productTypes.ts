@@ -4,12 +4,13 @@ export interface Product{
     id : string,
     productName : string
     productDescription : string,
-    productPrice : string,
+    productPrice : number,
     productTotalStockQty : string,
     productImageUrl : string,
     createdAt : string,
     userId : UserId,
     categoryId : Category,
+    Category : Category
 }
 
 interface UserId{

@@ -9,6 +9,6 @@ export interface cartState {
 
 
 export interface CartItems{
-    product : Product,
+    Product : Product,
     quantity : number
 }

@@ -46,14 +46,14 @@ class CartController{
             })
             
         }
-        const product = await Product.findByPk(productId)
+        const data = await Cart.findAll({
+            where : {
+                userId 
+            }
+        })
         res.status(200).json({
             message : "Item added to cart successfully",
-            data : 
-            {
-                ...cartItem.toJSON(),
-                product : product?.toJSON()
-            }
+            data : data
         })
     }
 
@@ -66,7 +66,7 @@ class CartController{
             include : [
                 {
                     model :Product,
-                    attributes : ['productName','productDescription','productImageUrl'],
+                    attributes : ['productName','productDescription','productImageUrl','productPrice','id'],
                    include : [
                     {
                         model : Category,
@@ -131,7 +131,21 @@ class CartController{
             where : {
                 userId,
                 productId
+            },
+             include : [
+                {
+                    model :Product,
+                    attributes : ['productName','productDescription','productImageUrl','productPrice','id'],
+                   include : [
+                    {
+                        model : Category,
+                        attributes : ['id','categoryName']
+                    }
+                   ]
+
+                
             }
+        ],
         })
         if(cartData){
             cartData.quantity = quantity
