@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import Navbar from "../../globals/components/navbar/Navbar";
 import { DeleteCartItems, UpdateCartItems } from "../../store/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -139,9 +140,11 @@ const Cart = () => {
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>
             </div>
+            <Link to={'/checkout'}>
             <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
               Check out
             </button>
+            </Link>
           </div>
         </div>
       </div>
