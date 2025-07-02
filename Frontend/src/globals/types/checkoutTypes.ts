@@ -77,7 +77,7 @@ export interface MyOrdersData{
 
 export interface OrderDetails {
     id : string, 
-    quantity : number , 
+    quantity : number, 
     orderId : string, 
     Product : Product,
     Order : MyOrdersData

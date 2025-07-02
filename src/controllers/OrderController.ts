@@ -7,6 +7,8 @@ import OrderDetail from "../database/models/OrderDetails";
 import axios from "axios";
 import Product from "../database/models/Product";
 import Cart from "../database/models/Cart";
+import User from "../database/models/userModel";
+import Category from "../database/models/Category";
 
 
 class ExtendedOrder extends Order {
@@ -161,7 +163,22 @@ class OrderController{
             },
             include : [
                 {
-                    model : Product
+                    model : Product,
+                    include : [
+                        {
+                            model : Category,
+                            attributes : ['categoryName']
+                        }
+                    ]
+                },{
+                    model : Order,
+                    include : [{
+                        model : Payment,
+                        attributes : ['paymentStatus', 'paymentMethod'],
+                    },{
+                        model : User,
+                        attributes : ['username', 'email']
+                    }]
                 }
             ]
         })

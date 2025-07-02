@@ -77,12 +77,22 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
+              <>
               <Link
                 to="#"
                 className="text-sm font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
               >
                 <span onClick={handleLogout}>Logout</span>
               </Link>
+
+               <Link
+                to="/myorders"
+                className="text-sm font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+              >
+                <span>Orders</span>
+              </Link>
+              </>
+
             )}
 
             <>

@@ -10,7 +10,7 @@ import { OrderStatus } from "../../globals/types/checkoutTypes"
 const MyOrdersDetails = () => {
   const {id} = useParams()
   const {orderDetails,status}  = useAppSelector((state)=>state.orders)
-  console.log(orderDetails)
+ // console.log(orderDetails)
   const dispatch = useAppDispatch()
   useEffect( ()=>{
     if(id) {
@@ -34,7 +34,7 @@ const MyOrdersDetails = () => {
     
     <div className="flex justify-start item-start space-y-5 flex-col">
       <h1 className="text-1xl dark:text-white lg:text-2xl font-semibold leading-7 lg:leading-9 text-gray-600">Order Details </h1>
-      {/* <p className="text-base dark:text-gray-300 font-medium leading-6 text-gray-600">{new Date(orderDetails[0]?.Order.createdAt).toLocaleDateString()}</p> */}
+      <p className="text-base dark:text-red-900 font-medium leading-6 text-gray-600">{new Date(orderDetails[0]?.Order.createdAt).toLocaleDateString()}</p>
     </div>
     <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
       <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
