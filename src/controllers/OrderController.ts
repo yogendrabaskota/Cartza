@@ -58,7 +58,7 @@ class OrderController{
         if(paymentDetails.paymentMethod === PaymentMethod.Khalti){
             // Khalti Integration Here
             const data = {
-                return_url : "http://localhost:3000/success",
+                return_url : "http://localhost:5173/myorders",
                 purchase_order_id : orderData.id,
                 amount : totalAmount * 100,
                 website_url : "http://localhost:3000/",
