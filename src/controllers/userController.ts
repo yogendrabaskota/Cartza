@@ -66,6 +66,23 @@ class AuthController {
         })
        }
     }
+     public static async fetchAllUsers(req:AuthRequest, res:Response):Promise<void>{
+
+        const users = await User.findAll()
+        if(users.length > 0) {
+            res.status(200).json({
+            message : "Users fetched successfully",
+            data : users
+            })
+
+        }else {
+            res.status(404).json({
+                message : "No Users found",
+                data : []
+            })
+        }
+
+    }
 }
 
 export default AuthController

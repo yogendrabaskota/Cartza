@@ -128,14 +128,14 @@ const Cart = () => {
             </div>
             <div className="flex justify-between">
               <p className="text-gray-700">Shipping</p>
-              <p className="text-gray-700">NPR 50</p>
+              <p className="text-gray-700">NPR 0</p>
             </div>
             <hr className="my-4" />
             <div className="flex justify-between">
               <p className="text-lg font-bold">Total</p>
               <div>
                 <p className="mb-1 text-lg font-bold">
-                  {totalPriceInCarts + 50}{" "}
+                  {totalPriceInCarts}{" "}
                 </p>
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>

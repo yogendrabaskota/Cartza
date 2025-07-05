@@ -10,6 +10,7 @@ const router:Router = Express.Router()
 
 router.route("/")
     .post(authMiddleware.isAuthenticated,catchAsync(OrderController.createOrder))
+    .get(authMiddleware.isAuthenticated,authMiddleware.restrictTo(Role.Admin),catchAsync(OrderController.fetchAllOrders))
 router.route('/verify')
     .post(authMiddleware.isAuthenticated,catchAsync(OrderController.verifyTransaction))
 router.route('/customer')

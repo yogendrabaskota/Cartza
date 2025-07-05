@@ -1,9 +1,9 @@
 export interface Props {
   type: string;
-  onSubmit: (data: RegisterUserTypes) => void;
+  onSubmit: (data: UserDataTypes) => void;
 }
 
-export interface RegisterUserTypes {
+export interface UserDataTypes {
   email: string;
   username: string;
   password: string;
